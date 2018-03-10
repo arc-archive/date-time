@@ -15,10 +15,6 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
     <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
     <script src="../../web-component-tester/browser.js"></script>
-    <script src="../../iron-test-helpers/test-helpers.js"></script>
-    <script src="../../iron-test-helpers/mock-interactions.js"></script>
-
-    <!-- Step 1: import the element to test -->
     <link rel="import" href="../date-time.html">
   </head>
   <body>
@@ -30,70 +26,61 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     </test-fixture>
 
     <script>
-    /* global suite, test, fixture, assert, TestHelpers */
-    suite('basic', function() {
+    suite('basic', () => {
       var element;
-      setup(function() {
+      setup(() => {
         element = fixture('basic');
       });
 
-      test('`date-time` should display date', function() {
-        TestHelpers.flushAsynchronousOperations();
+      test('`date-time` should display date', () => {
         // Can't check date format at this point since it may vary depending
         // on the locale settings.
         assert.isString(element.display);
         console.log(element.iso);
       });
 
-      test('Should compute ISO time', function() {
+      test('Should compute ISO time', () => {
         assert.equal(element.iso, '2010-12-10T11:05:45.000Z');
       });
 
-      test('Should support time zone settings', function() {
-        element.locales = 'en-US';
-        element.timeZone = 'UTC';
-        element.timeZoneName = 'short';
-        assert.equal(element.display, '12/10/2010, GMT');
-      });
-
-      test('Should set weekday', function() {
+      test('Should set weekday', () => {
         element.weekday = 'long';
         element.locales = 'en-US';
         assert.equal(element.display, 'Friday');
       });
 
-      test('Should set year', function() {
+      test('Should set year', () => {
         element.year = 'numeric';
         element.locales = 'en-US';
         assert.equal(element.display, '2010');
       });
 
-      test('Should set month', function() {
+      test('Should set month', () => {
         element.month = 'long';
         element.locales = 'en-US';
         assert.equal(element.display, 'December');
       });
 
-      test('Should set day', function() {
+      test('Should set day', () => {
         element.day = 'numeric';
         element.locales = 'en-US';
         assert.equal(element.display, '10');
       });
 
-      test('Should set hour', function() {
+      test('Should set hour', () => {
         element.hour = 'numeric';
         element.locales = 'en-US';
         element.timeZone = 'UTC';
         assert.equal(element.display, '11 AM');
       });
 
-      test('Should set minute', function() {
+      test('Should set minute', () => {
         element.minute = 'numeric';
         element.locales = 'en-US';
         assert.equal(element.display, '5');
       });
 
-      test('Should set second', function() {
+      test('Should set second', () => {
         element.second = 'numeric';
         element.locales = 'en-US';
         assert.equal(element.display, '45');
