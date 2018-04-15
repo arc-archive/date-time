@@ -1,4 +1,10 @@
 <a name="2.0.2"></a>
+## [2.0.2](https://github.com/advanced-rest-client/date-time/compare/2.0.1...2.0.2) (2018-04-15)
+
+
+
+
+<a name="2.0.2"></a>
 ## [2.0.2](https://github.com/advanced-rest-client/date-time/compare/2.0.1...2.0.2) (2018-03-11)
 
 
