@@ -12,37 +12,6 @@ License for the specific language governing permissions and limitations under
 the License.
 -->
 <link rel="import" href="../polymer/polymer-element.html">
-<!--
-`<date-time>` An element to display formatted date and time.
-
-The `date` propery accepts Date object, Number as a timestamp or string that
-will be parsed to the Date object.
-
-This element uses the `Intl` interface which is available in IE 11+ browsers.
-It will throw an error in IE 10 unless you'll provide a polyfill for the `Intl`.
-
-To format the date use [Intl.DateTimeFormat](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/DateTimeFormat) inteface options.
-
-The default value for each date-time component property is undefined, but if all component properties are undefined, then year, month, and day are assumed to be "numeric".
-
-### Example
-```
-<date-time date="2010-12-10T11:50:45Z" year="numeric" month="narrow" day="numeric"></date-time>
-```
-
-The element provides accessibility by using the `time` element and setting the `datetime` attribute on it.
-
-### Styling
-`<date-time>` provides the following custom properties and mixins for styling:
-
-Custom property | Description | Default
-----------------|-------------|----------
-`--date-time` | Mixin applied to the element | `{}`
-
-@group UI Elements
-@element date-time
-@demo demo/index.html
--->
 <dom-module id="date-time">
   <template>
     <style>
@@ -54,6 +23,44 @@ Custom property | Description | Default
     <time datetime$="[[iso]]">[[display]]</time>
   </template>
   <script>
+  /**
+   * An element to display formatted date and time.
+   *
+   * The `date` propery accepts Date object, Number as a timestamp or string
+   * that will be parsed to the Date object.
+   *
+   * This element uses the `Intl` interface which is available in IE 11+ browsers.
+   *
+   * To format the date use [Intl.DateTimeFormat]
+   * (https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/DateTimeFormat)
+   * inteface options.
+   *
+   * The default value for each date-time component property is undefined,
+   * but if all component properties are undefined, then year, month, and day
+   * are assumed to be "numeric" (per spec).
+   *
+   * ### Example
+   * ```html
+   * <date-time date="2010-12-10T11:50:45Z" year="numeric" month="narrow" day="numeric"></date-time>
+   * ```
+   *
+   * The element provides accessibility by using the `time` element and setting
+   * the `datetime` attribute on it.
+   *
+   * ### Styling
+   *
+   * `<date-time>` provides the following custom properties and mixins for styling:
+   *
+   * Custom property | Description | Default
+   * ----------------|-------------|----------
+   * `--date-time` | Mixin applied to the element | `{}`
+   *
+   *
+   * @customElement
+   * @polymer
+   * @demo demo/index.html
+   * @memberof UiElements
+   */
   class DateTime extends Polymer.Element {
     static get is() { return 'date-time'; }
     static get properties() {
@@ -214,24 +221,47 @@ Custom property | Description | Default
         } catch (e) {
           date = new Date();
         }
-      } else if (Number.isInteger(date)) {
+      } else if (!isNaN(date)) {
         date = new Date(date);
       } else if (!(date instanceof Date)) {
         date = new Date();
       }
-      const options = {
-        year: this.year ? this.year : undefined,
-        month: this.month ? this.month : undefined,
-        day: this.day ? this.day : undefined,
-        hour: this.hour ? this.hour : undefined,
-        minute: this.minute ? this.minute : undefined,
-        second: this.second ? this.second : undefined,
-        weekday: this.weekday ? this.weekday : undefined,
-        era: this.era ? this.era : undefined,
-        timeZoneName: this.timeZoneName ? this.timeZoneName : undefined,
-        timeZone: this.timeZone ? this.timeZone : undefined
-      };
-
+      if (typeof Intl === 'undefined') {
+        this.set('display', date.toString());
+        this._setIso(date.toISOString());
+        return;
+      }
+      const options = {};
+      if (this.year) {
+        options.year = this.year;
+      }
+      if (this.month) {
+        options.month = this.month;
+      }
+      if (this.day) {
+        options.day = this.day;
+      }
+      if (this.hour) {
+        options.hour = this.hour;
+      }
+      if (this.minute) {
+        options.minute = this.minute;
+      }
+      if (this.second) {
+        options.second = this.second;
+      }
+      if (this.weekday) {
+        options.weekday = this.weekday;
+      }
+      if (this.era) {
+        options.era = this.era;
+      }
+      if (this.timeZoneName) {
+        options.timeZoneName = this.timeZoneName;
+      }
+      if (this.timeZone) {
+        options.timeZone = this.timeZone;
+      }
       if (this.hour12 !== undefined) {
         options.hour12 = this.hour12;
       }
