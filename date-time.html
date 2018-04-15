@@ -214,7 +214,7 @@ Custom property | Description | Default
         } catch (e) {
           date = new Date();
         }
-      } else if (Number.isInteger(date)) {
+      } else if (!isNaN(date)) {
         date = new Date(date);
       } else if (!(date instanceof Date)) {
         date = new Date();
