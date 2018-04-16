@@ -2,12 +2,16 @@
   "name": "date-time",
   "description": "An element to display formatted date and time",
   "license": "Apache-2.0",
+  "version": "2.0.3",
   "authors": [
+    "Pawel Psztyc",
     "The Advanced REST client authors <arc@mulesoft.com>"
   ],
   "keywords": [
     "web-components",
-    "polymer"
+    "polymer",
+    "date-time",
+    "label"
   ],
   "private": true,
   "main": "date-time.html",
@@ -22,15 +26,13 @@
     "iron-demo-helpers": "PolymerElements/iron-demo-helpers#^2.0.0",
     "web-component-tester": "Polymer/web-component-tester#^6.0.0",
     "webcomponentsjs": "webcomponents/webcomponentsjs#^1.0.0",
-    "iron-component-page": "^3.0.1"
+    "iron-component-page": "PolymerElements/iron-component-page#^3.0.1"
   },
   "ignore": [
     "**/.*",
-    "dependencyci.yml",
     "node_modules",
     "bower_components",
     "test",
     "tasks"
-  ],
-  "version": "2.0.2"
+  ]
 }

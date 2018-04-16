@@ -72,6 +72,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     function normalizeString(str) {
       return str.replace(EDGE_IS_STILL_SO_BAD, '');
     }
+    const hasSupport = typeof Intl !== 'undefined';
     suite('basic', () => {
 
       test('`date-time` should display date', (done) => {
@@ -97,31 +98,43 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       });
 
       test('Should set weekday', (done) => {
-        const element = fixture('LongWeekday');
-        flush(() => {
-          assert.equal(normalizeString(element.display), 'Friday');
+        if (hasSupport) {
+          const element = fixture('LongWeekday');
+          flush(() => {
+            assert.equal(normalizeString(element.display), 'Friday');
+            done();
+          });
+        } else {
           done();
-        });
+        }
       });
 
       test('Should set year', () => {
-        const element = fixture('NumericYear');
-        assert.equal(normalizeString(element.display), '2010');
+        if (hasSupport) {
+          const element = fixture('NumericYear');
+          assert.equal(normalizeString(element.display), '2010');
+        }
       });
 
       test('Should set month', () => {
-        const element = fixture('LongMonth');
-        assert.equal(normalizeString(element.display), 'December');
+        if (hasSupport) {
+          const element = fixture('LongMonth');
+          assert.equal(normalizeString(element.display), 'December');
+        }
       });
 
       test('Should set day', () => {
-        const element = fixture('NumericDay');
-        assert.equal(normalizeString(element.display), '10');
+        if (hasSupport) {
+          const element = fixture('NumericDay');
+          assert.equal(normalizeString(element.display), '10');
+        }
       });
 
       test('Should set hour', () => {
-        const element = fixture('NumericHour');
-        assert.equal(normalizeString(element.display), '11 AM');
+        if (hasSupport) {
+          const element = fixture('NumericHour');
+          assert.equal(normalizeString(element.display), '11 AM');
+        }
       });
     });
     </script>
