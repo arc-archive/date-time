@@ -2,8 +2,10 @@ language: node_js
 node_js: stable
 sudo: required
 before_script:
+  - npm install
+  - npm install -g polylint
   - npm install -g polymer-cli
-  - npm install -g
+  - polylint
 addons:
   firefox: latest
   apt:
@@ -13,7 +15,6 @@ addons:
       - google-chrome-stable
   sauce_connect: true
 script:
-  - polymer lint date-time.html
   - xvfb-run polymer test --module-resolution=node --npm polymer test --plugin local
   - 'if [ "${TRAVIS_PULL_REQUEST}" = "false" ]; then polymer test --module-resolution=node --npm --plugin sauce --job-name "date-time:${TRAVIS_BRANCH}" --build-number=${TRAVIS_BUILD_NUMBER}; fi'
 cache:
