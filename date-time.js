@@ -31,7 +31,7 @@ import { PolymerElement, html } from '@polymer/polymer/polymer-element.js';
  *
  * ### Example
  * ```html
- * <date-time date="2010-12-10T11:50:45Z" year="numeric" month="narrow" day="numeric"></date-time>
+ * < date-time date="2010-12-10T11:50:45Z" year="numeric" month="narrow" day="numeric"></date-time>
  * ```
  *
  * The element provides accessibility by using the `time` element and setting
@@ -39,7 +39,7 @@ import { PolymerElement, html } from '@polymer/polymer/polymer-element.js';
  *
  * ### Styling
  *
- * `<date-time>` provides the following custom properties and mixins for styling:
+ * date-time provides the following custom properties and mixins for styling:
  *
  * Custom property | Description | Default
  * ----------------|-------------|----------
