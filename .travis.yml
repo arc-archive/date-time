@@ -5,7 +5,7 @@ before_script:
   - npm install
   - npm install -g polylint
   - npm install -g polymer-cli
-  - polylint
+  - polylint --input date-time.js
 addons:
   firefox: latest
   apt:
