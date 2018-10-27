@@ -28,8 +28,7 @@
   "scripts": {
     "lint": "polymer lint date-time.html",
     "test-sauce": "polymer test --plugin sauce --job-name \"date-time:local-test\"",
-    "test": "polymer test --plugin sauce",
-    "update-types": "npm install && gen-typescript-declarations --deleteExisting --outDir ."
+    "test": "polymer test --plugin sauce"
   },
   "bugs": {
     "url": "https://github.com/advanced-rest-client/date-time/issues",
