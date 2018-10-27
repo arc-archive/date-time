@@ -9,70 +9,82 @@ Code distributed by Google as part of the polymer project is also
 subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
 -->
 <html>
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
 
-    <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
-    <script src="../../web-component-tester/browser.js"></script>
-    <link rel="import" href="../date-time.html">
-  </head>
-  <body>
+<head>
+  <title>date-time tests</title>
 
-    <test-fixture id="basic">
-      <template>
-        <date-time locales="en-US" time-zone="UTC" date="2010-12-10T11:05:45.000Z"></date-time>
-      </template>
-    </test-fixture>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
 
-    <test-fixture id="LongWeekday">
-      <template>
-        <date-time locales="en-US" time-zone="UTC" date="2010-12-10T11:05:45.000Z" weekday="long"></date-time>
-      </template>
-    </test-fixture>
+  <script src="../node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js"></script>
+  <script src="../node_modules/wct-browser-legacy/browser.js"></script>
 
-    <test-fixture id="LongMonth">
-      <template>
-        <date-time locales="en-US" time-zone="UTC" date="2010-12-10T11:05:45.000Z" month="long"></date-time>
-      </template>
-    </test-fixture>
+  <script type="module">
+    import '@polymer/iron-test-helpers/test-helpers.js';
+    import '@polymer/iron-test-helpers/mock-interactions.js';
+  </script>
 
-    <test-fixture id="NumericYear">
-      <template>
-        <date-time locales="en-US" time-zone="UTC" date="2010-12-10T11:05:45.000Z" year="numeric"></date-time>
-      </template>
-    </test-fixture>
+  <!-- Step 1: import the element to test -->
+  <script type="module" src="../date-time.js"></script>
+</head>
 
-    <test-fixture id="NumericDay">
-      <template>
-        <date-time locales="en-US" time-zone="UTC" date="2010-12-10T11:05:45.000Z" day="numeric"></date-time>
-      </template>
-    </test-fixture>
+<body>
 
-    <test-fixture id="NumericHour">
-      <template>
-        <date-time locales="en-US" time-zone="UTC" date="2010-12-10T11:05:45.000Z" hour="numeric"></date-time>
-      </template>
-    </test-fixture>
+  <test-fixture id="basic">
+    <template>
+      <date-time locales="en-US" time-zone="UTC" date="2010-12-10T11:05:45.000Z"></date-time>
+    </template>
+  </test-fixture>
 
-    <test-fixture id="NumericMinute">
-      <template>
-        <date-time locales="en-US" time-zone="UTC" date="2010-12-10T11:05:45.000Z" minute="numeric"></date-time>
-      </template>
-    </test-fixture>
+  <test-fixture id="LongWeekday">
+    <template>
+      <date-time locales="en-US" time-zone="UTC" date="2010-12-10T11:05:45.000Z" weekday="long"></date-time>
+    </template>
+  </test-fixture>
 
-    <test-fixture id="NumericSecond">
-      <template>
-        <date-time locales="en-US" time-zone="UTC" date="2010-12-10T11:05:45.000Z" second="numeric"></date-time>
-      </template>
-    </test-fixture>
+  <test-fixture id="LongMonth">
+    <template>
+      <date-time locales="en-US" time-zone="UTC" date="2010-12-10T11:05:45.000Z" month="long"></date-time>
+    </template>
+  </test-fixture>
 
-    <script>
+  <test-fixture id="NumericYear">
+    <template>
+      <date-time locales="en-US" time-zone="UTC" date="2010-12-10T11:05:45.000Z" year="numeric"></date-time>
+    </template>
+  </test-fixture>
+
+  <test-fixture id="NumericDay">
+    <template>
+      <date-time locales="en-US" time-zone="UTC" date="2010-12-10T11:05:45.000Z" day="numeric"></date-time>
+    </template>
+  </test-fixture>
+
+  <test-fixture id="NumericHour">
+    <template>
+      <date-time locales="en-US" time-zone="UTC" date="2010-12-10T11:05:45.000Z" hour="numeric"></date-time>
+    </template>
+  </test-fixture>
+
+  <test-fixture id="NumericMinute">
+    <template>
+      <date-time locales="en-US" time-zone="UTC" date="2010-12-10T11:05:45.000Z" minute="numeric"></date-time>
+    </template>
+  </test-fixture>
+
+  <test-fixture id="NumericSecond">
+    <template>
+      <date-time locales="en-US" time-zone="UTC" date="2010-12-10T11:05:45.000Z" second="numeric"></date-time>
+    </template>
+  </test-fixture>
+
+  <script>
     const EDGE_IS_STILL_SO_BAD = /\u200E/g;
     function normalizeString(str) {
       return str.replace(EDGE_IS_STILL_SO_BAD, '');
     }
     const hasSupport = typeof Intl !== 'undefined';
+
     suite('basic', () => {
 
       test('`date-time` should display date', (done) => {
@@ -137,7 +149,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         }
       });
     });
-    </script>
+  </script>
 
-  </body>
+</body>
+
 </html>

@@ -9,6 +9,7 @@ Code distributed by Google as part of the polymer project is also
 subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
 -->
 <html>
+
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
@@ -16,22 +17,27 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
   <title>date-time demo</title>
 
-  <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
-  <link rel="import" href="../../iron-demo-helpers/demo-pages-shared-styles.html">
-  <link rel="import" href="../../iron-demo-helpers/demo-snippet.html">
-  <link rel="import" href="../date-time.html">
+  <script src="../node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js"></script>
+
+  <script type="module">
+    import '../date-time.js';
+    import '@polymer/iron-demo-helpers/demo-pages-shared-styles.js';
+    import '@polymer/iron-demo-helpers/demo-snippet.js';
+  </script>
 
   <custom-style>
     <style is="custom-style" include="demo-pages-shared-styles">
     </style>
   </custom-style>
 </head>
+
 <body unresolved>
   <div class="vertical-section-container centered">
     <h3>Date and time</h3>
     <demo-snippet>
       <template>
-        <date-time date="2010-12-10T11:50:45Z" year="numeric" month="long" day="numeric" hour="2-digit" minute="2-digit" second="2-digit"></date-time>
+        <date-time date="2010-12-10T11:50:45Z" year="numeric" month="long" day="numeric" hour="2-digit" minute="2-digit"
+          second="2-digit"></date-time>
       </template>
     </demo-snippet>
 
@@ -82,15 +88,16 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       <template>
         <date-time class="styled" hour="2-digit" minute="2-digit" second="2-digit" hour12></date-time>
         <style>
-        .styled {
-          background-color: gray;
-          padding: 12px;
-          color: #fff;
-        }
+          .styled {
+            background-color: gray;
+            padding: 12px;
+            color: #fff;
+          }
         </style>
       </template>
     </demo-snippet>
 
   </div>
 </body>
+
 </html>

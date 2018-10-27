@@ -4,9 +4,9 @@
 Tag: `<date-time>`
 
 ### Installation
-Using bower:
+Using npm:
 ```
-bower install --save advanced-rest-client/date-time
+npm install --save @arc-components/date-time
 ```
 
 `<date-time>` An element to display formatted date and time.
