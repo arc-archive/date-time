@@ -1,3 +1,9 @@
+<a name="2.0.4"></a>
+## [2.0.4](https://github.com/advanced-rest-client/date-time/compare/2.0.1...2.0.4) (2018-10-29)
+
+
+
+
 <a name="2.0.3"></a>
 ## [2.0.3](https://github.com/advanced-rest-client/date-time/compare/2.0.1...2.0.3) (2018-04-16)
 
