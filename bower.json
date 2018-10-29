@@ -2,7 +2,7 @@
   "name": "date-time",
   "description": "An element to display formatted date and time",
   "license": "Apache-2.0",
-  "version": "2.0.3",
+  "version": "2.0.4",
   "authors": [
     "Pawel Psztyc",
     "The Advanced REST client authors <arc@mulesoft.com>"
