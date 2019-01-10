@@ -1,25 +1,17 @@
 <!doctype html>
-<!--
-@license
-Copyright (c) 2015 The Polymer Project Authors. All rights reserved.
-This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
-The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
-The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
-Code distributed by Google as part of the polymer project is also
-subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
--->
 <html>
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
-
-    <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
+    <script src="../../webcomponentsjs/webcomponents-loader.js"></script>
     <script src="../../web-component-tester/browser.js"></script>
+    <link rel="import" href="../../polymer/polymer.html">
+
     <link rel="import" href="../date-time.html">
   </head>
   <body>
 
-    <test-fixture id="basic">
+    <test-fixture id="Basic">
       <template>
         <date-time locales="en-US" time-zone="UTC" date="2010-12-10T11:05:45.000Z"></date-time>
       </template>
@@ -67,32 +59,34 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       </template>
     </test-fixture>
 
+    <test-fixture id="Empty">
+      <template>
+        <date-time></date-time>
+      </template>
+    </test-fixture>
+
     <script>
     const EDGE_IS_STILL_SO_BAD = /\u200E/g;
     function normalizeString(str) {
       return str.replace(EDGE_IS_STILL_SO_BAD, '');
     }
     const hasSupport = typeof Intl !== 'undefined';
-    suite('basic', () => {
-
-      test('`date-time` should display date', (done) => {
+    suite('Basics', () => {
+      test('Renders date string value', (done) => {
         // Can't check date format at this point since it may vary depending
         // on the locale settings.
-        const element = fixture('basic');
+        const element = fixture('Basic');
         flush(() => {
-          assert.isString(element.display);
-          const node = element.shadowRoot.querySelector('time');
-          assert.ok(node.innerText);
+          const txt = element.shadowRoot.innerHTML;
+          assert.typeOf(txt, 'string');
           done();
         });
       });
 
       test('Should compute ISO time', (done) => {
-        const element = fixture('basic');
+        const element = fixture('Basic');
         flush(() => {
-          assert.equal(element.iso, '2010-12-10T11:05:45.000Z');
-          const node = element.shadowRoot.querySelector('time');
-          assert.equal(node.getAttribute('datetime'), '2010-12-10T11:05:45.000Z');
+          assert.equal(element.getAttribute('datetime'), '2010-12-10T11:05:45.000Z');
           done();
         });
       });
@@ -101,7 +95,8 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         if (hasSupport) {
           const element = fixture('LongWeekday');
           flush(() => {
-            assert.equal(normalizeString(element.display), 'Friday');
+            const txt = element.shadowRoot.innerHTML;
+            assert.equal(normalizeString(txt), 'Friday');
             done();
           });
         } else {
@@ -109,34 +104,129 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         }
       });
 
-      test('Should set year', () => {
+      test('Sets year', () => {
         if (hasSupport) {
           const element = fixture('NumericYear');
-          assert.equal(normalizeString(element.display), '2010');
+          const txt = element.shadowRoot.innerHTML;
+          assert.equal(normalizeString(txt), '2010');
         }
       });
 
       test('Should set month', () => {
         if (hasSupport) {
           const element = fixture('LongMonth');
-          assert.equal(normalizeString(element.display), 'December');
+          const txt = element.shadowRoot.innerHTML;
+          assert.equal(normalizeString(txt), 'December');
         }
       });
 
       test('Should set day', () => {
         if (hasSupport) {
           const element = fixture('NumericDay');
-          assert.equal(normalizeString(element.display), '10');
+          const txt = element.shadowRoot.innerHTML;
+          assert.equal(normalizeString(txt), '10');
         }
       });
 
       test('Should set hour', () => {
         if (hasSupport) {
           const element = fixture('NumericHour');
-          assert.equal(normalizeString(element.display), '11 AM');
+          const txt = element.shadowRoot.innerHTML;
+          assert.equal(normalizeString(txt), '11 AM');
         }
       });
     });
+
+    suite('Attributes settings', () => {
+      let element;
+      setup(() => {
+        element = fixture('Empty');
+      });
+
+      [
+        ['locales'], ['date'], ['year'], ['month'], ['day'], ['hour'], ['minute'], ['second'],
+        ['weekday', undefined, 'short'], ['time-zone-name', 'timeZoneName', 'short'],
+        ['era', undefined, 'narrow'], ['time-zone', 'timeZone', 'UTC'], ['hour12', undefined, true]
+      ].forEach((item) => {
+        test(`Calls _updateLabel() when "${item[0]}" attribute changes`, () => {
+          const value = item[2] || 'numeric';
+          const spy = sinon.spy(element, '_updateLabel');
+          element.setAttribute(item[0], value);
+          assert.isTrue(spy.called);
+        });
+
+        test(`Updates propety value when "${item[0]}" attribute changes`, () => {
+          const prop = item[1] || item[0];
+          const value = item[2] || 'numeric';
+          element.setAttribute(item[0], value);
+          if (prop === 'hour12') {
+            assert.isTrue(element[prop]);
+          } else {
+            assert.equal(element[prop], value);
+          }
+        });
+      });
+    });
+
+    suite('Properies changed', () => {
+      let element;
+      setup(() => {
+        element = fixture('Empty');
+      });
+
+      [
+        ['locales'], ['date'], ['year'], ['month'], ['day'], ['hour'], ['minute'], ['second'],
+        ['weekday', undefined, 'short'], ['time-zone-name', 'timeZoneName', 'short'],
+        ['era', undefined, 'narrow'], ['time-zone', 'timeZone', 'UTC'], ['hour12', undefined, true]
+      ].forEach((item) => {
+        test(`Calls _updateLabel() when "${item[0]}" property change`, () => {
+          const value = item[2] || 'numeric';
+          const prop = item[1] || item[0];
+          const spy = sinon.spy(element, '_updateLabel');
+          element[prop] = value;
+          assert.isTrue(spy.called);
+        });
+
+        test(`Updates attribute value when "${item[0]}" property changes`, () => {
+          const attr = item[0];
+          const prop = item[1] || attr;
+          const value = item[2] || 'numeric';
+          element[prop] = value;
+          assert.isTrue(element.hasAttribute(attr), 'Has corresponding attribute');
+          if (prop !== 'hour12') {
+            assert.equal(element.getAttribute(attr), value);
+          }
+        });
+      });
+    });
+
+    suite('_getIntlOptions()', () => {
+      let element;
+      setup(() => {
+        element = fixture('Empty');
+      });
+
+      [
+        ['year'], ['month'], ['day'], ['hour'], ['minute'], ['second'],
+        ['weekday', undefined, 'short'], ['time-zone-name', 'timeZoneName', 'short'],
+        ['era', undefined, 'narrow'], ['time-zone', 'timeZone', 'UTC'], ['hour12', undefined, true]
+      ].forEach((item) => {
+        test(`Adds "${item[0]}" property`, () => {
+          const attr = item[0];
+          const prop = item[1] || attr;
+          const value = item[2] || 'numeric';
+          element[prop] = value;
+          const result = element._getIntlOptions();
+          if (prop === 'hour12') {
+            assert.isTrue(result[prop]);
+          } else {
+            assert.equal(result[prop], value);
+          }
+        });
+      });
+    });
+
+    a11ySuite('Basic');
     </script>
 
   </body>

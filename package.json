@@ -1,6 +1,6 @@
 {
-  "name": "@arc-components/date-time",
-  "version": "2.0.4",
+  "name": "@advanced-rest-client/date-time",
+  "version": "2.1.0",
   "license": "Apache-2.0",
   "description": "An element to display formatted date and time",
   "devDependencies": {
@@ -15,8 +15,8 @@
   "scripts": {
     "lint": "polymer lint date-time.html",
     "test-sauce": "polymer test --plugin sauce --job-name \"date-time:local-test\"",
-    "test": "polymer test --plugin sauce",
-    "update-types": "bower install && gen-typescript-declarations --deleteExisting --outDir ."
+    "test": "polymer test --plugin local",
+    "update-types": "gen-typescript-declarations --deleteExisting --outDir ."
   },
   "repository": {
     "type": "git",
