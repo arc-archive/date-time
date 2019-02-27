@@ -1,13 +1,31 @@
 {
-  "name": "@advanced-rest-client/date-time",
-  "version": "2.1.0",
-  "license": "Apache-2.0",
   "description": "An element to display formatted date and time",
-  "devDependencies": {
-    "@polymer/gen-typescript-declarations": "^1.5.1"
+  "keywords": [
+    "web-components",
+    "polymer",
+    "date-time",
+    "label"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/advanced-rest-client/date-time.git"
   },
-  "private": false,
-  "main": "date-time.html",
+  "name": "@advanced-rest-client/date-time",
+  "version": "3.0.0-preview.1",
+  "license": "Apache-2.0",
+  "devDependencies": {
+    "@polymer/gen-typescript-declarations": "^1.6.1",
+    "@polymer/polymer": "^3.0.0",
+    "@polymer/iron-demo-helpers": "^3.0.0",
+    "@webcomponents/webcomponentsjs": "^2.0.0",
+    "@polymer/iron-component-page": "^4.0.0",
+    "@polymer/test-fixture": "^4.0.2",
+    "chai": "^4.2.0",
+    "mocha": "^5.2.0",
+    "sinon": "^7.2.3",
+    "wct-mocha": "^1.0.0"
+  },
+  "main": "date-time.js",
   "authors": [
     "Pawel Psztyc",
     "The Advanced REST client authors <arc@mulesoft.com>"
@@ -18,12 +36,13 @@
     "test": "polymer test --plugin local",
     "update-types": "gen-typescript-declarations --deleteExisting --outDir ."
   },
-  "repository": {
-    "type": "git",
-    "url": "git://github.com/advanced-rest-client/date-time.git"
-  },
   "bugs": {
     "url": "https://github.com/advanced-rest-client/date-time/issues",
     "email": "arc@mulesoft.com"
-  }
+  },
+  "contributors": [
+    "Pawel Psztyc",
+    "The Advanced REST client authors <arc@mulesoft.com>"
+  ],
+  "dependencies": {}
 }
