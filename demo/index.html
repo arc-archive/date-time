@@ -5,10 +5,9 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1, user-scalable=yes">
   <title>date-time demo</title>
-  <script src="../../webcomponentsjs/webcomponents-loader.js"></script>
-  <link rel="import" href="../../iron-demo-helpers/demo-pages-shared-styles.html">
-  <link rel="import" href="../../iron-demo-helpers/demo-snippet.html">
-  <link rel="import" href="../date-time.html">
+  <script src="../node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js"></script>
+  <script type="module" src="../node_modules/@advanced-rest-client/arc-demo-helper/arc-demo-helper.js"></script>
+  <script type="module" src="../date-time.js"></script>
   <style>
   body {
     font-family: 'Roboto', 'Noto', sans-serif;
@@ -37,63 +36,63 @@
 <body unresolved>
   <div class="vertical-section-container centered">
     <h3>Date and time</h3>
-    <demo-snippet>
+    <arc-demo-helper>
       <template>
         <date-time date="2010-12-10T11:50:45Z" year="numeric" month="long" day="numeric" hour="2-digit" minute="2-digit" second="2-digit"></date-time>
       </template>
-    </demo-snippet>
+    </arc-demo-helper>
 
     <h3>Current date and time</h3>
-    <demo-snippet>
+    <arc-demo-helper>
       <template>
         <date-time year="numeric" month="long" day="numeric" hour="2-digit" minute="2-digit" second="2-digit"></date-time>
       </template>
-    </demo-snippet>
+    </arc-demo-helper>
 
     <h3>Current time</h3>
-    <demo-snippet>
+    <arc-demo-helper>
       <template>
         <date-time hour="numeric" minute="numeric" second="numeric"></date-time>
       </template>
-    </demo-snippet>
+    </arc-demo-helper>
 
     <h3>Date only</h3>
-    <demo-snippet>
+    <arc-demo-helper>
       <template>
         <date-time date="2010-12-10T11:50:45Z" year="numeric" month="long" day="numeric"></date-time>
       </template>
-    </demo-snippet>
+    </arc-demo-helper>
 
     <h3>Time only</h3>
-    <demo-snippet>
+    <arc-demo-helper>
       <template>
         <date-time date="2010-12-10T11:05:45Z" hour="2-digit" minute="2-digit" second="2-digit"></date-time>
       </template>
-    </demo-snippet>
+    </arc-demo-helper>
 
     <h3>Using locales</h3>
-    <demo-snippet>
+    <arc-demo-helper>
       <template>
         <date-time date="2010-12-10T11:50:45Z" weekday="long" year="numeric" month="long" day="numeric" locales="de-DE"></date-time>
       </template>
-    </demo-snippet>
+    </arc-demo-helper>
 
     <h3>Using time zone</h3>
-    <demo-snippet>
+    <arc-demo-helper>
       <template>
         <date-time time-zone="UTC" time-zone-name="short"></date-time>
       </template>
-    </demo-snippet>
+    </arc-demo-helper>
 
     <h3>12 hour clock</h3>
-    <demo-snippet>
+    <arc-demo-helper>
       <template>
         <date-time hour="2-digit" minute="2-digit" second="2-digit" hour12></date-time>
       </template>
-    </demo-snippet>
+    </arc-demo-helper>
 
     <h3>Styled</h3>
-    <demo-snippet>
+    <arc-demo-helper>
       <template>
         <date-time class="styled" hour="2-digit" minute="2-digit" second="2-digit" hour12></date-time>
         <style>
@@ -104,7 +103,7 @@
         }
         </style>
       </template>
-    </demo-snippet>
+    </arc-demo-helper>
 
   </div>
 </body>

@@ -5,8 +5,12 @@
  *   https://github.com/Polymer/tools/tree/master/packages/gen-typescript-declarations
  *
  * To modify these typings, edit the source file(s):
- *   date-time.html
+ *   date-time.js
  */
+
+
+// tslint:disable:variable-name Describing an API that's defined elsewhere.
+// tslint:disable:no-any describes the API as best we are able today
 
 declare namespace UiElements {
 
@@ -27,6 +31,7 @@ declare namespace UiElements {
    * are assumed to be "numeric" (per spec).
    *
    * ### Example
+   *
    * ```html
    * <date-time date="2010-12-10T11:50:45Z" year="numeric" month="narrow" day="numeric"></date-time>
    * ```

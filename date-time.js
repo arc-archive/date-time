@@ -1,4 +1,4 @@
-<!--
+/**
 @license
 Copyright 2016 The Advanced REST client authors <arc@mulesoft.com>
 Licensed under the Apache License, Version 2.0 (the "License"); you may not
@@ -10,8 +10,7 @@ distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
 WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
 License for the specific language governing permissions and limitations under
 the License.
--->
-<script>
+*/
 /**
  * An element to display formatted date and time.
  *
@@ -397,9 +396,9 @@ class DateTime extends HTMLElement {
       return;
     }
     const date = this._getParsableDate(this.date);
+    this._setIso(date.toISOString());
     if (typeof Intl === 'undefined') {
       this.shadowRoot.innerText = date.toString();
-      this._setIso(date.toISOString());
       return;
     }
 
@@ -416,7 +415,6 @@ class DateTime extends HTMLElement {
       const node = document.createTextNode(value);
       this.shadowRoot.appendChild(node);
     }
-    this._setIso(date.toISOString());
   }
 
   _setIso(v) {
@@ -424,4 +422,3 @@ class DateTime extends HTMLElement {
   }
 }
 window.customElements.define('date-time', DateTime);
-</script>
