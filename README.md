@@ -8,9 +8,6 @@
 
 An element to render data and/or time formatted for user locale.
 
-Note, this component is pure web component. Polymer is used for demo page, tests, and documentation.
-
-
 ```html
 <date-time date="2010-12-10T11:50:45Z" year="numeric" month="narrow" day="numeric"></date-time>
 ```
@@ -36,7 +33,7 @@ npm install --save @advanced-rest-client/date-time
     </script>
   </head>
   <body>
-    <date-time></date-time>
+    <date-time date="2010-12-10T11:50:45Z" year="numeric" month="long" day="numeric" hour="2-digit" minute="2-digit" second="2-digit"></date-time>
   </body>
 </html>
 ```
@@ -44,18 +41,14 @@ npm install --save @advanced-rest-client/date-time
 ### In a Polymer 3 element
 
 ```js
-import {PolymerElement, html} from '@polymer/polymer';
+import { LitElement, html } from 'lit-element';
 import '@advanced-rest-client/date-time/date-time.js';
 
-class SampleElement extends PolymerElement {
-  static get template() {
+class SampleElement extends LitElement {
+  render() {
     return html`
-    <date-time></date-time>
+    <date-time date="2010-12-10T11:50:45Z" year="numeric" month="long" day="numeric" hour="2-digit" minute="2-digit" second="2-digit"></date-time>
     `;
-  }
-
-  _authChanged(e) {
-    console.log(e.detail);
   }
 }
 customElements.define('sample-element', SampleElement);
@@ -65,19 +58,17 @@ customElements.define('sample-element', SampleElement);
 
 ```sh
 git clone https://github.com/advanced-rest-client/date-time
-cd api-url-editor
+cd date-time
 npm install
-npm install -g polymer-cli
 ```
 
 ### Running the demo locally
 
 ```sh
-polymer serve --npm
-open http://127.0.0.1:<port>/demo/
+npm start
 ```
 
 ### Running the tests
 ```sh
-polymer test --npm
+npm test
 ```

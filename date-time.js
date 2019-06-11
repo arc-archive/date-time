@@ -396,9 +396,9 @@ class DateTime extends HTMLElement {
       return;
     }
     const date = this._getParsableDate(this.date);
+    this._setIso(date.toISOString());
     if (typeof Intl === 'undefined') {
       this.shadowRoot.innerText = date.toString();
-      this._setIso(date.toISOString());
       return;
     }
 
@@ -415,7 +415,6 @@ class DateTime extends HTMLElement {
       const node = document.createTextNode(value);
       this.shadowRoot.appendChild(node);
     }
-    this._setIso(date.toISOString());
   }
 
   _setIso(v) {
