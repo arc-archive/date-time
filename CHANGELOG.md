@@ -40,3 +40,8 @@
 
 
 
+# [3.0.0](https://github.com/advanced-rest-client/date-time/compare/2.0.1...3.0.0) (2019-06-11)
+
+
+
+
