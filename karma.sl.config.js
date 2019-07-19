@@ -5,7 +5,7 @@ const createBaseConfig = require('./karma.conf.js');
 
 module.exports = (config) => {
   const cnf = slSettings(config);
-  cnf.sauceLabs.testName = 'paper-chip-input';
+  cnf.sauceLabs.testName = 'date-time';
   cnf.browsers = [
     'SL_Chrome',
     'SL_Chrome-1',
@@ -28,7 +28,7 @@ module.exports = (config) => {
   }
 
   config.set(
-    merge(createBaseConfig(config), cnf)
+      merge(createBaseConfig(config), cnf)
   );
 
   return config;
