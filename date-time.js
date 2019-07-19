@@ -53,13 +53,13 @@ class DateTime extends HTMLElement {
   static get observedAttributes() {
     return [
       'locales', 'date', 'year', 'month', 'day', 'hour', 'minute', 'second',
-      'weekday', 'time-zone-name', 'era', 'time-zone', 'hour12'
+      'weekday', 'time-zone-name', 'era', 'time-zone', 'hour12', 'itemprop'
     ];
   }
 
   constructor() {
     super();
-    this.attachShadow({mode: 'open'});
+    this.attachShadow({ mode: 'open' });
     this._observer = new MutationObserver(() => {
       this.setAttribute('aria-label', this.shadowRoot.textContent);
     });
@@ -324,7 +324,34 @@ class DateTime extends HTMLElement {
     }
   }
 
-  attributeChangedCallback() {
+  get itemprop() {
+    return this._getTimeNode().getAttribute('itemprop');
+  }
+
+  set itemprop(value) {
+    const old = this.itemprop;
+    if (old === value) {
+      return;
+    }
+    if (old && value === null) {
+      // This setter moves attribute from this element to "<time>" elsement.
+      // When the attribute is removed from this then it becomes null.
+      return;
+    }
+    const node = this._getTimeNode();
+    if (value) {
+      node.setAttribute('itemprop', value);
+      this.removeAttribute('itemprop');
+    } else {
+      node.removeAttribute('itemprop');
+    }
+  }
+
+  attributeChangedCallback(name, oldValue, newValue) {
+    if (name === 'itemprop') {
+      this[name] = newValue;
+      return;
+    }
     this._updateLabel();
   }
   /**
@@ -338,7 +365,7 @@ class DateTime extends HTMLElement {
     } else if (typeof date === 'string') {
       try {
         date = new Date(date);
-        let _test = date.getDate();
+        const _test = date.getDate();
         if (_test !== _test) {
           date = new Date();
         }
@@ -390,35 +417,37 @@ class DateTime extends HTMLElement {
     }
     return options;
   }
+  /**
+   * @return {Element} A reference to a `<time>` element that is in the shadow DOM of this element.
+   */
+  _getTimeNode() {
+    let node = this.shadowRoot.querySelector('time');
+    if (!node) {
+      node = document.createElement('time');
+      this.shadowRoot.appendChild(node);
+    }
+    return node;
+  }
 
   _updateLabel() {
     if (!this.parentElement) {
       return;
     }
     const date = this._getParsableDate(this.date);
-    this._setIso(date.toISOString());
+    const node = this._getTimeNode();
+    node.setAttribute('datetime', date.toISOString());
+    /* istanbul ignore if */
     if (typeof Intl === 'undefined') {
-      this.shadowRoot.innerText = date.toString();
+      node.innerText = date.toString();
       return;
     }
-
     let locales;
     if (this.locales) {
       locales = this.locales;
     }
     const options = this._getIntlOptions();
-
     const value = new Intl.DateTimeFormat(locales, options).format(date);
-    if (this.shadowRoot.childNodes.length) {
-      this.shadowRoot.childNodes[0].textContent = value;
-    } else {
-      const node = document.createTextNode(value);
-      this.shadowRoot.appendChild(node);
-    }
-  }
-
-  _setIso(v) {
-    this.setAttribute('datetime', v);
+    node.innerText = value;
   }
 }
 window.customElements.define('date-time', DateTime);

@@ -1,8 +1,8 @@
-import {fixture, assert, nextFrame} from '@open-wc/testing';
+import { fixture, assert, nextFrame } from '@open-wc/testing';
 import sinon from 'sinon/pkg/sinon-esm.js';
 import '../date-time.js';
 
-describe('<paper-chip-autocomplete>', () => {
+describe('<date-time>', () => {
   async function basicFixture() {
     return (await fixture(`
       <date-time locales="en-US" time-zone="UTC" date="2010-12-10T11:05:45.000Z"></date-time>`));
@@ -51,6 +51,16 @@ describe('<paper-chip-autocomplete>', () => {
     return (await fixture(`<date-time></date-time>`));
   }
 
+  async function deutscheFixture() {
+    return (await fixture(`
+      <date-time locales="de-DE" time-zone="UTC" date="2010-12-10T11:05:45.000Z"></date-time>`));
+  }
+
+  async function itempropFixture() {
+    return (await fixture(`
+      <date-time itemprop="title" date="2010-12-10T11:05:45.000Z"></date-time>`));
+  }
+
   const EDGE_IS_STILL_SO_BAD = /\u200E/g;
   function normalizeString(str) {
     return str.replace(EDGE_IS_STILL_SO_BAD, '');
@@ -62,21 +72,21 @@ describe('<paper-chip-autocomplete>', () => {
       // on the locale settings.
       const element = await basicFixture();
       await nextFrame();
-      const txt = element.shadowRoot.innerHTML;
+      const txt = element._getTimeNode().innerHTML;
       assert.typeOf(txt, 'string');
     });
 
     it('Should compute ISO time', async () => {
       const element = await basicFixture();
       await nextFrame();
-      assert.equal(element.getAttribute('datetime'), '2010-12-10T11:05:45.000Z');
+      assert.equal(element._getTimeNode().getAttribute('datetime'), '2010-12-10T11:05:45.000Z');
     });
 
     it('Should set weekday', async () => {
       if (hasSupport) {
         const element = await longWeekdayFixture();
         await nextFrame();
-        const txt = element.shadowRoot.innerHTML;
+        const txt = element._getTimeNode().innerHTML;
         assert.equal(normalizeString(txt), 'Friday');
       }
     });
@@ -84,7 +94,7 @@ describe('<paper-chip-autocomplete>', () => {
     it('Sets year', async () => {
       if (hasSupport) {
         const element = await numericYearFixture();
-        const txt = element.shadowRoot.innerHTML;
+        const txt = element._getTimeNode().innerHTML;
         assert.equal(normalizeString(txt), '2010');
       }
     });
@@ -92,7 +102,7 @@ describe('<paper-chip-autocomplete>', () => {
     it('Should set month', async () => {
       if (hasSupport) {
         const element = await longMonthFixture();
-        const txt = element.shadowRoot.innerHTML;
+        const txt = element._getTimeNode().innerHTML;
         assert.equal(normalizeString(txt), 'December');
       }
     });
@@ -100,7 +110,7 @@ describe('<paper-chip-autocomplete>', () => {
     it('Should set day', async () => {
       if (hasSupport) {
         const element = await numericDayFixture();
-        const txt = element.shadowRoot.innerHTML;
+        const txt = element._getTimeNode().innerHTML;
         assert.equal(normalizeString(txt), '10');
       }
     });
@@ -108,7 +118,7 @@ describe('<paper-chip-autocomplete>', () => {
     it('Should set hour', async () => {
       if (hasSupport) {
         const element = await numericHourFixture();
-        const txt = element.shadowRoot.innerHTML;
+        const txt = element._getTimeNode().innerHTML;
         assert.equal(normalizeString(txt), '11 AM');
       }
     });
@@ -116,7 +126,7 @@ describe('<paper-chip-autocomplete>', () => {
     it('Sets minute', async () => {
       if (hasSupport) {
         const element = await numericMinuteFixture();
-        const txt = element.shadowRoot.innerHTML;
+        const txt = element._getTimeNode().innerHTML;
         assert.equal(normalizeString(txt), '5');
       }
     });
@@ -124,7 +134,7 @@ describe('<paper-chip-autocomplete>', () => {
     it('Sets minute', async () => {
       if (hasSupport) {
         const element = await numericSecondFixture();
-        const txt = element.shadowRoot.innerHTML;
+        const txt = element._getTimeNode().innerHTML;
         assert.equal(normalizeString(txt), '45');
       }
     });
@@ -216,6 +226,62 @@ describe('<paper-chip-autocomplete>', () => {
           assert.equal(result[prop], value);
         }
       });
+    });
+  });
+
+  describe('_updateLabel()', () => {
+    let element;
+
+    it('Does nothing when not in the DOM', async () => {
+      element = await basicFixture();
+      const parent = element.parentElement;
+      parent.removeChild(element);
+      const time = element._getTimeNode();
+      element.shadowRoot.removeChild(time);
+      element.day = 'numeric';
+      const node = element.shadowRoot.querySelector('time');
+      assert.notOk(node);
+    });
+
+    it('Sets "datetime" attribiute on <time>', async () => {
+      element = await basicFixture();
+      const time = element._getTimeNode();
+      assert.equal(time.getAttribute('datetime'), '2010-12-10T11:05:45.000Z');
+    });
+
+    it('Sets text content on <time>', async () => {
+      element = await basicFixture();
+      const time = element._getTimeNode();
+      assert.equal(time.innerText.trim().toLowerCase(), '12/10/2010');
+    });
+
+    it('Uses different locale', async () => {
+      element = await deutscheFixture();
+      const time = element._getTimeNode();
+      assert.equal(time.innerText.trim().toLowerCase(), '10.12.2010');
+    });
+  });
+
+  describe('itemprop attribute', () => {
+    let element;
+
+    it('Coppies itemprop attribute to <time> element', async () => {
+      element = await itempropFixture();
+      assert.equal(element._getTimeNode().getAttribute('itemprop'), 'title');
+    });
+
+    it('Removes itemprop attribute from this element', async () => {
+      element = await itempropFixture();
+      assert.equal(element.getAttribute('itemprop'), null);
+    });
+
+    it('Ignores the change when attribute is already set', async () => {
+      element = await itempropFixture();
+      const spy = sinon.spy(element, '_getTimeNode');
+      element.itemprop = 'title';
+      // Getter uses `_getTimeNode` to read attribute.
+      // This should happen only once in theis case.
+      assert.isTrue(spy.calledOnce);
     });
   });
 });
