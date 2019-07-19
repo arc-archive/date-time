@@ -45,3 +45,24 @@
 
 
 
+## [3.0.1](https://github.com/advanced-rest-client/date-time/compare/2.0.1...3.0.1) (2019-07-19)
+
+
+### build
+
+* bumping version ([d9767fa0cc09f35629b0bfcf2922ae7c54ba3dae](https://github.com/advanced-rest-client/date-time/commit/d9767fa0cc09f35629b0bfcf2922ae7c54ba3dae))
+
+### chore
+
+* updating project's metadata ([d7e17cdf7127d14902252bf15803181fda08048b](https://github.com/advanced-rest-client/date-time/commit/d7e17cdf7127d14902252bf15803181fda08048b))
+
+### refactor
+
+* adding <time> element for accessibility support ([65fd679c97046c5a39374ae51a66606dcff8c0df](https://github.com/advanced-rest-client/date-time/commit/65fd679c97046c5a39374ae51a66606dcff8c0df))
+
+### test
+
+* fixing test name in sauce labs ([3a315bf84673d60856dc2663ddd76e9fd18bd08e](https://github.com/advanced-rest-client/date-time/commit/3a315bf84673d60856dc2663ddd76e9fd18bd08e))
+
+
+
