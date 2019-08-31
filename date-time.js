@@ -60,9 +60,7 @@ class DateTime extends HTMLElement {
   constructor() {
     super();
     this.attachShadow({ mode: 'open' });
-    this._observer = new MutationObserver(() => {
-      this.setAttribute('aria-label', this.shadowRoot.textContent);
-    });
+    this._observer = new MutationObserver(() => this._mutationHandler());
   }
 
   connectedCallback() {
@@ -77,6 +75,11 @@ class DateTime extends HTMLElement {
   disconnectedCallback() {
     this._observer.disconnect();
   }
+
+  _mutationHandler() {
+    this.setAttribute('aria-label', this.shadowRoot.textContent);
+  }
+
   /**
    * A string with a BCP 47 language tag, or an array of such strings.
    * For the general form and interpretation of the locales argument,
@@ -274,7 +277,7 @@ class DateTime extends HTMLElement {
    */
   get hour12() {
     if (!this.hasAttribute('hour12') && !this.__hour12set) {
-      return;
+      return null;
     }
     return this.hasAttribute('hour12');
   }
