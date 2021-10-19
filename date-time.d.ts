@@ -46,6 +46,8 @@ declare namespace UiElements {
    * Custom property | Description | Default
    * ----------------|-------------|----------
    * `--date-time` | Mixin applied to the element | `{}`
+   * 
+   * @deprecated Use the `@anypoint-web-components/awc` module instead.
    */
   class DateTime extends HTMLElement {
 

@@ -1,10 +1,8 @@
-[![Published on NPM](https://img.shields.io/npm/v/@advanced-rest-client/date-time.svg)](https://www.npmjs.com/package/@advanced-rest-client/date-time)
+# DEPRECATED
 
-[![Build Status](https://travis-ci.org/advanced-rest-client/date-time.svg?branch=stage)](https://travis-ci.org/advanced-rest-client/date-time)
+Use the `@anypoint-web-components/awc` module instead.
 
-[![Published on webcomponents.org](https://img.shields.io/badge/webcomponents.org-published-blue.svg)](https://www.webcomponents.org/element/advanced-rest-client/date-time)
-
-## &lt;date-time&gt;
+-----
 
 An element to render data and/or time formatted for user locale.
 

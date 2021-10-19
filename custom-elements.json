@@ -1,0 +1,160 @@
+{
+  "version": "experimental",
+  "tags": [
+    {
+      "name": "date-time",
+      "path": "./date-time.js",
+      "description": "An element to display formatted date and time.\n\nThe `date` propery accepts Date object, Number as a timestamp or string\nthat will be parsed to the Date object.\n\nThis element uses the `Intl` interface which is available in IE 11+ browsers.\n\nTo format the date use [Intl.DateTimeFormat]\n(https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/DateTimeFormat)\ninteface options.\n\nThe default value for each date-time component property is undefined,\nbut if all component properties are undefined, then year, month, and day\nare assumed to be \"numeric\" (per spec).\n\n### Example\n\n```html\n<date-time date=\"2010-12-10T11:50:45Z\" year=\"numeric\" month=\"narrow\" day=\"numeric\"></date-time>\n```\n\nThe element provides accessibility by using the `time` element and setting\nthe `datetime` attribute on it.\n\n### Styling\n\n`<date-time>` provides the following custom properties and mixins for styling:\n\nCustom property | Description | Default\n----------------|-------------|----------\n`--date-time` | Mixin applied to the element | `{}`",
+      "attributes": [
+        {
+          "name": "locales",
+          "description": "A string with a BCP 47 language tag, or an array of such strings.\nFor the general form and interpretation of the locales argument,\nsee the Intl page.\nThe following Unicode extension keys are allowed:\n- nu - Numbering system. Possible values include: \"arab\", \"arabext\",\n\"bali\", \"beng\", \"deva\", \"fullwide\", \"gujr\", \"guru\", \"hanidec\", \"khmr\",\n\"knda\", \"laoo\", \"latn\", \"limb\", \"mlym\", \"mong\", \"mymr\", \"orya\",\n\"tamldec\", \"telu\", \"thai\", \"tibt\".\n- ca - Calendar. Possible values include: \"buddhist\", \"chinese\",\n\"coptic\", \"ethioaa\", \"ethiopic\", \"gregory\", \"hebrew\", \"indian\",\n\"islamic\", \"islamicc\", \"iso8601\", \"japanese\", \"persian\", \"roc\".",
+          "type": "String"
+        },
+        {
+          "name": "date",
+          "description": "A date object to render.\nIt can be a `Date` object, number representing a timestamp\nor valid date string. The argument is parsed by `Date` constructor\nto produce the value.",
+          "type": "Date|String|number"
+        },
+        {
+          "name": "year",
+          "description": "The representation of the year.\nPossible values are \"numeric\", \"2-digit\".",
+          "type": "string"
+        },
+        {
+          "name": "month",
+          "description": "The representation of the month.\nPossible values are \"numeric\", \"2-digit\", \"narrow\", \"short\", \"long\".",
+          "type": "string"
+        },
+        {
+          "name": "day",
+          "description": "The representation of the day.\nPossible values are \"numeric\", \"2-digit\".",
+          "type": "string"
+        },
+        {
+          "name": "hour",
+          "description": "The representation of the hour.\nPossible values are \"numeric\", \"2-digit\".",
+          "type": "string"
+        },
+        {
+          "name": "minute",
+          "description": "The representation of the minute.\nPossible values are \"numeric\", \"2-digit\".",
+          "type": "string"
+        },
+        {
+          "name": "second",
+          "description": "The representation of the second.\nPossible values are \"numeric\", \"2-digit\".",
+          "type": "string"
+        },
+        {
+          "name": "weekday",
+          "description": "The representation of the weekday.\nPossible values are \"narrow\", \"short\", \"long\".",
+          "type": "string"
+        },
+        {
+          "name": "era",
+          "description": "The representation of the era.\n\nPossible values are \"narrow\", \"short\", \"long\".",
+          "type": "string"
+        },
+        {
+          "name": "hour12",
+          "description": "Whether to use 12-hour time (as opposed to 24-hour time).\nPossible values are `true` and `false`; the default is locale\ndependent.",
+          "type": "Boolean"
+        },
+        {
+          "name": "itemprop",
+          "type": "string | null"
+        },
+        {
+          "name": "time-zone-name"
+        },
+        {
+          "name": "time-zone"
+        }
+      ],
+      "properties": [
+        {
+          "name": "timeZoneName",
+          "description": "The representation of the time zone name.\n\nPossible values are \"short\", \"long\".",
+          "type": "string"
+        },
+        {
+          "name": "timeZone",
+          "description": "The time zone to use. The only value implementations must recognize\nis \"UTC\"; the default is the runtime's default time zone.\nImplementations may also recognize the time zone names of the IANA\ntime zone database, such as \"Asia/Shanghai\", \"Asia/Kolkata\",\n\"America/New_York\".",
+          "type": "string"
+        },
+        {
+          "name": "locales",
+          "attribute": "locales",
+          "description": "A string with a BCP 47 language tag, or an array of such strings.\nFor the general form and interpretation of the locales argument,\nsee the Intl page.\nThe following Unicode extension keys are allowed:\n- nu - Numbering system. Possible values include: \"arab\", \"arabext\",\n\"bali\", \"beng\", \"deva\", \"fullwide\", \"gujr\", \"guru\", \"hanidec\", \"khmr\",\n\"knda\", \"laoo\", \"latn\", \"limb\", \"mlym\", \"mong\", \"mymr\", \"orya\",\n\"tamldec\", \"telu\", \"thai\", \"tibt\".\n- ca - Calendar. Possible values include: \"buddhist\", \"chinese\",\n\"coptic\", \"ethioaa\", \"ethiopic\", \"gregory\", \"hebrew\", \"indian\",\n\"islamic\", \"islamicc\", \"iso8601\", \"japanese\", \"persian\", \"roc\".",
+          "type": "String"
+        },
+        {
+          "name": "date",
+          "attribute": "date",
+          "description": "A date object to render.\nIt can be a `Date` object, number representing a timestamp\nor valid date string. The argument is parsed by `Date` constructor\nto produce the value.",
+          "type": "Date|String|number"
+        },
+        {
+          "name": "year",
+          "attribute": "year",
+          "description": "The representation of the year.\nPossible values are \"numeric\", \"2-digit\".",
+          "type": "string"
+        },
+        {
+          "name": "month",
+          "attribute": "month",
+          "description": "The representation of the month.\nPossible values are \"numeric\", \"2-digit\", \"narrow\", \"short\", \"long\".",
+          "type": "string"
+        },
+        {
+          "name": "day",
+          "attribute": "day",
+          "description": "The representation of the day.\nPossible values are \"numeric\", \"2-digit\".",
+          "type": "string"
+        },
+        {
+          "name": "hour",
+          "attribute": "hour",
+          "description": "The representation of the hour.\nPossible values are \"numeric\", \"2-digit\".",
+          "type": "string"
+        },
+        {
+          "name": "minute",
+          "attribute": "minute",
+          "description": "The representation of the minute.\nPossible values are \"numeric\", \"2-digit\".",
+          "type": "string"
+        },
+        {
+          "name": "second",
+          "attribute": "second",
+          "description": "The representation of the second.\nPossible values are \"numeric\", \"2-digit\".",
+          "type": "string"
+        },
+        {
+          "name": "weekday",
+          "attribute": "weekday",
+          "description": "The representation of the weekday.\nPossible values are \"narrow\", \"short\", \"long\".",
+          "type": "string"
+        },
+        {
+          "name": "era",
+          "attribute": "era",
+          "description": "The representation of the era.\n\nPossible values are \"narrow\", \"short\", \"long\".",
+          "type": "string"
+        },
+        {
+          "name": "hour12",
+          "attribute": "hour12",
+          "description": "Whether to use 12-hour time (as opposed to 24-hour time).\nPossible values are `true` and `false`; the default is locale\ndependent.",
+          "type": "Boolean"
+        },
+        {
+          "name": "itemprop",
+          "attribute": "itemprop",
+          "type": "string | null"
+        }
+      ]
+    }
+  ]
+}
